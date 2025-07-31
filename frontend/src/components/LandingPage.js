@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Container } from 'react-bootstrap';
-import { useSpring, animated } from 'react-spring';
+import { useSpring, animated } from '@react-spring/web';
 
 const LandingPage = () => {
   const jumbotronStyle = {
