@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Container } from 'react-bootstrap';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import NavigationBar from './components/NavigationBar';
+import PackageVetting from './modules/PackageVetting';
+import SecretsHygiene from './modules/SecretsHygiene';
+import CloudMisconfiguration from './modules/CloudMisconfiguration';
+import IamAnalyzer from './modules/IamAnalyzer';
+import AnomalyDetector from './modules/AnomalyDetector';
+import ComplianceDashboard from './modules/ComplianceDashboard';
+import ShadowItDetector from './modules/ShadowItDetector';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <NavigationBar />
+        <Container className="mt-4">
+          <Routes>
+            <Route path="/package-vetting" element={<PackageVetting />} />
+            <Route path="/secrets-hygiene" element={<SecretsHygiene />} />
+            <Route path="/cloud-misconfiguration" element={<CloudMisconfiguration />} />
+            <Route path="/iam-analyzer" element={<IamAnalyzer />} />
+            <Route path="/anomaly-detector" element={<AnomalyDetector />} />
+            <Route path="/compliance-dashboard" element={<ComplianceDashboard />} />
+            <Route path="/shadow-it-detector" element={<ShadowItDetector />} />
+          </Routes>
+        </Container>
+      </div>
+    </Router>
   );
 }
 
