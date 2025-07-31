@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useSpring, animated } from '@react-spring/web';
+import { useSpring } from '@react-spring/web';
+import { animated } from '@react-spring/web';
 
 const NavLink = ({ to, children }) => {
   const [hover, setHover] = useState(false);
