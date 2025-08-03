@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from 'react';
 import { Button, Container } from "react-bootstrap";
 import { useSpring } from "@react-spring/web";
 import { animated } from "@react-spring/web";
 
 const LandingPage = () => {
+  const { theme } = useContext(ThemeContext);
+
   const jumbotronStyle = {
     padding: "1rem",
     marginBottom: "1rem",
