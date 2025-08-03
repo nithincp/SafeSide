@@ -10,6 +10,7 @@ import IamAnalyzer from './modules/IamAnalyzer';
 import AnomalyDetector from './modules/AnomalyDetector';
 import ComplianceDashboard from './modules/ComplianceDashboard';
 import ShadowItDetector from './modules/ShadowItDetector';
+import SearchBar from './components/SearchBar';
 import { ThemeProvider } from './context/ThemeContext';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Router>
         <div>
           <NavigationBar />
+          <SearchBar />
           <Container className="mt-4">
             <Routes>
               <Route path="/" element={<LandingPage />} />
