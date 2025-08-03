@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Button, Container } from "react-bootstrap";
 import { useSpring } from "@react-spring/web";
 import { animated } from "@react-spring/web";
+import { ThemeContext } from '../context/ThemeContext';
 
 const LandingPage = () => {
   const { theme } = useContext(ThemeContext);
