@@ -81,7 +81,7 @@ const NavigationBar = () => {
               id="basic-nav-dropdown"
             >
               <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Setting</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">Settings</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">
                 Dark/Light toggle
               </NavDropdown.Item>

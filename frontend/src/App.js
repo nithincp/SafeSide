@@ -10,12 +10,14 @@ import IamAnalyzer from './modules/IamAnalyzer';
 import AnomalyDetector from './modules/AnomalyDetector';
 import ComplianceDashboard from './modules/ComplianceDashboard';
 import ShadowItDetector from './modules/ShadowItDetector';
+import SearchBar from './components/SearchBar';
 
 function App() {
   return (
     <Router>
       <div>
         <NavigationBar />
+        <SearchBar />
         <Container className="mt-4">
           <Routes>
             <Route path="/" element={<LandingPage />} />

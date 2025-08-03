@@ -5,8 +5,8 @@ import { animated } from "@react-spring/web";
 
 const LandingPage = () => {
   const jumbotronStyle = {
-    padding: "2rem 1rem",
-    marginBottom: "2rem",
+    padding: "1rem",
+    marginBottom: "1rem",
     backgroundColor: "#e9ecef",
     borderRadius: ".3rem",
   };
@@ -24,7 +24,7 @@ const LandingPage = () => {
   });
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-2 px-2">
       <animated.div style={{ ...jumbotronStyle, ...fadeIn }}>
         <h1>Welcome to the SafeSide!</h1>
         <p>
