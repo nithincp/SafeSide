@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useSpring } from '@react-spring/web';
 import { animated } from '@react-spring/web';
@@ -22,7 +22,7 @@ const NavLink = ({ to, children }) => {
 
 const NavigationBar = () => {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg">
+    <Navbar bg="info" variant="light" expand="lg">
       <Container>
         <NavLink to="/">
           <Navbar.Brand>Security Dashboard</Navbar.Brand>
@@ -37,6 +37,15 @@ const NavigationBar = () => {
             <NavLink to="/anomaly-detector">Anomaly Detector</NavLink>
             <NavLink to="/compliance-dashboard">Compliance Dashboard</NavLink>
             <NavLink to="/shadow-it-detector">Shadow IT Detector</NavLink>
+          </Nav>
+          <Nav>
+            <NavDropdown title={<img src="https://via.placeholder.com/30" alt="user" className="rounded-circle" />} id="basic-nav-dropdown">
+              <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.2">Setting</NavDropdown.Item>
+              <NavDropdown.Item href="#action/3.3">Dark/Light toggle</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">Log out</NavDropdown.Item>
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>
