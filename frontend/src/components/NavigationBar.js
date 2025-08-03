@@ -39,7 +39,7 @@ const NavigationBar = () => {
             <NavLink to="/shadow-it-detector">Shadow IT Detector</NavLink>
           </Nav>
           <Nav>
-            <NavDropdown title={<img src="https://via.placeholder.com/30" alt="user" className="rounded-circle" />} id="basic-nav-dropdown">
+            <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" width="30" height="30" alt="user" className="rounded-circle" />} id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Setting</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Dark/Light toggle</NavDropdown.Item>
