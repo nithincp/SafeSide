@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useSpring } from '@react-spring/web';
-import { animated } from '@react-spring/web';
+import { useSpring, animated } from '@react-spring/web';
+import { ThemeContext } from '../context/ThemeContext';
 
 const NavLink = ({ to, children }) => {
   const [hover, setHover] = useState(false);
@@ -21,8 +21,10 @@ const NavLink = ({ to, children }) => {
 };
 
 const NavigationBar = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
   return (
-    <Navbar bg="info" variant="light" expand="lg">
+    <Navbar bg={theme === 'light' ? 'info' : 'dark'} variant={theme === 'light' ? 'light' : 'dark'} expand="lg">
       <Container>
         <NavLink to="/">
           <Navbar.Brand>Security Dashboard</Navbar.Brand>
@@ -42,7 +44,9 @@ const NavigationBar = () => {
             <NavDropdown title={<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" width="30" height="30" alt="user" className="rounded-circle" />} id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Account</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">Setting</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Dark/Light toggle</NavDropdown.Item>
+              <NavDropdown.Item onClick={toggleTheme}>
+                {theme === 'light' ? 'Dark' : 'Light'} Mode
+              </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">Log out</NavDropdown.Item>
             </NavDropdown>
