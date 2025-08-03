@@ -25,7 +25,7 @@ const NavigationBar = () => {
     <Navbar bg="info" variant="light" expand="lg">
       <Container>
         <NavLink to="/">
-          <Navbar.Brand>Security Dashboard</Navbar.Brand>
+          <Navbar.Brand className="fw-bold">SafeSide</Navbar.Brand>
         </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
