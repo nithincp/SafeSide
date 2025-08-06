@@ -10,7 +10,7 @@ const LandingPage = () => {
   const jumbotronStyle = {
     padding: "1rem",
     marginBottom: "1rem",
-    backgroundColor: "#e9ecef",
+    backgroundColor: theme === 'light' ? "#e9ecef" : "#495057",
     borderRadius: ".3rem",
   };
 
