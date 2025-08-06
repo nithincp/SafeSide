@@ -15,34 +15,45 @@ const PackageVetting = () => {
   const [cves, setCves] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [suggestedVersion, setSuggestedVersion] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
     setCves([]);
+    setSuggestedVersion('');
+    setMessage('');
+
     try {
-      console.log("Sending request to backend");
-      console.log(library, version, ecosystem);
       // Connect to Django backend API
-      const response = await fetch(`http://localhost:8000/api/check_cve/`, {
+      const response = await fetch('http://localhost:8000/api/check_cve/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          library: library.trim(),
-          version: version.trim(),
-          ecosystem,
-        }),
+          library: library,
+          version: version,
+          ecosystem: ecosystem
+        })
       });
-      
+
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
         throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
       }
+
       const data = await response.json();
-      setCves(data.cves || []);
+      
+      if (data.cves) {
+        setCves(data.cves);
+        setSuggestedVersion(data.suggested_non_vulnerable_version || '');
+        setMessage(data.message || '');
+      } else if (data.message) {
+        setMessage(data.message);
+      }
     } catch (err) {
       setError(err.message || 'Failed to connect to the server. Please check if the backend is running.');
     } finally {
@@ -50,14 +61,23 @@ const PackageVetting = () => {
     }
   };
 
-  const getSeverityColor = (severity) => {
-    switch ((severity || '').toLowerCase()) {
-      case 'critical': return '#dc3545';
-      case 'high': return '#fd7e14';
-      case 'medium': return '#ffc107';
-      case 'low': return '#28a745';
-      default: return '#6c757d';
-    }
+  const getSeverityColor = (cveId) => {
+    // You can implement severity detection based on CVE ID or other criteria
+    // For now, using a simple color scheme
+    return '#dc3545'; // Red for all CVEs
+  };
+
+  const formatReferences = (references) => {
+    if (!references || !Array.isArray(references)) return [];
+    
+    return references.map((ref, index) => ({
+      id: index,
+      type: ref.type || 'WEB',
+      url: ref.url,
+      displayName: ref.type === 'ADVISORY' ? 'Security Advisory' : 
+                   ref.type === 'WEB' ? 'Web Reference' :
+                   ref.type === 'PACKAGE' ? 'Package Repository' : ref.type
+    }));
   };
 
   return (
@@ -66,6 +86,7 @@ const PackageVetting = () => {
         <h1>Package Vulnerability Checker</h1>
         <p>Enter a library, version, and ecosystem to check for reported CVEs and explanations.</p>
       </header>
+      
       <section className="pv-form-section">
         <form className="pv-form" onSubmit={handleSubmit} autoComplete="off">
           <div className="pv-form-group">
@@ -80,6 +101,7 @@ const PackageVetting = () => {
               required
             />
           </div>
+          
           <div className="pv-form-group">
             <label htmlFor="pv-version">Version</label>
             <input
@@ -92,6 +114,7 @@ const PackageVetting = () => {
               required
             />
           </div>
+          
           <div className="pv-form-group">
             <label htmlFor="pv-ecosystem">Ecosystem</label>
             <select
@@ -105,41 +128,72 @@ const PackageVetting = () => {
               ))}
             </select>
           </div>
+          
           <button className="pv-submit" type="submit" disabled={loading}>
             {loading ? <span className="pv-spinner"></span> : 'Check CVEs'}
           </button>
         </form>
+        
         {error && <div className="pv-error">{error}</div>}
       </section>
+      
       <section className="pv-results">
+        {message && (
+          <div className="pv-message">
+            <h3>{message}</h3>
+            {suggestedVersion && (
+              <div className="pv-suggested-version">
+                <strong>Recommended Action:</strong> Upgrade to version {suggestedVersion} or later
+              </div>
+            )}
+          </div>
+        )}
+        
         {cves.length > 0 && (
           <div>
-            <h2 className="pv-results-title">Reported CVEs</h2>
+            <h2 className="pv-results-title">Found {cves.length} CVE{cves.length !== 1 ? 's' : ''}</h2>
             <ul className="pv-cve-list">
               {cves.map((cve, idx) => (
                 <li className="pv-cve-card" key={cve.id || idx}>
                   <div className="pv-cve-header">
                     <span className="pv-cve-id">{cve.id}</span>
-                    {cve.severity && (
-                      <span
-                        className="pv-cve-severity"
-                        style={{ backgroundColor: getSeverityColor(cve.severity) }}
-                      >
-                        {cve.severity.toUpperCase()}
-                      </span>
-                    )}
+                    <span
+                      className="pv-cve-severity"
+                      style={{ backgroundColor: getSeverityColor(cve.id) }}
+                    >
+                      VULNERABLE
+                    </span>
                   </div>
+                  
                   <div className="pv-cve-summary">{cve.summary}</div>
-                  <div className="pv-cve-explanation">
-                    <strong>Explanation:</strong>
-                    <span>{cve.explanation}</span>
-                  </div>
+                  
+                  {cve.details && (
+                    <div className="pv-cve-details">
+                      <strong>Details:</strong>
+                      <div className="pv-cve-details-content">
+                        {cve.details.split('\n').map((line, index) => (
+                          <p key={index}>{line}</p>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  
                   {cve.references && cve.references.length > 0 && (
                     <div className="pv-cve-refs">
                       <strong>References:</strong>
-                      <ul>
-                        {cve.references.map((ref, i) => (
-                          <li key={i}><a href={ref} target="_blank" rel="noopener noreferrer">{ref}</a></li>
+                      <ul className="pv-refs-list">
+                        {formatReferences(cve.references).map((ref) => (
+                          <li key={ref.id} className="pv-ref-item">
+                            <span className="pv-ref-type">{ref.displayName}:</span>
+                            <a 
+                              href={ref.url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="pv-ref-link"
+                            >
+                              {ref.url}
+                            </a>
+                          </li>
                         ))}
                       </ul>
                     </div>
@@ -149,8 +203,13 @@ const PackageVetting = () => {
             </ul>
           </div>
         )}
-        {cves.length === 0 && !loading && !error && (
-          <div className="pv-no-cves">No CVEs found for the specified package/version.</div>
+        
+        {cves.length === 0 && !loading && !error && message && (
+          <div className="pv-no-cves">
+            <div className="pv-success-icon">✅</div>
+            <h3>No vulnerabilities found!</h3>
+            <p>{message}</p>
+          </div>
         )}
       </section>
     </main>
