@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 .App-logo {
@@ -35,4 +37,437 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Dashboard specific styles */
+.dashboard-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 24px;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.dashboard-title {
+  background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.dashboard-subtitle {
+  color: #64748b;
+  font-weight: 400;
+}
+
+/* Widget card styles */
+.widget-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+.widget-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 24px 16px 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.widget-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.widget-icon {
+  color: #667eea;
+  font-size: 28px;
+}
+
+.widget-content {
+  padding: 24px;
+}
+
+/* Chart container styles */
+.chart-container {
+  position: relative;
+  height: 300px;
+  margin: 16px 0;
+}
+
+/* Summary stats styles */
+.summary-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.stat-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.stat-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #667eea;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Alert styles */
+.alert-container {
+  margin: 16px 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* List styles */
+.list-container {
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.list-item {
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.list-item:hover {
+  background-color: #f1f5f9;
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+/* Chip styles */
+.status-chip {
+  font-weight: 600;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Progress bar styles */
+.progress-container {
+  margin: 16px 0;
+}
+
+.progress-bar {
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 1200px) {
+  .dashboard-container {
+    padding: 16px;
+  }
+
+  .widget-header {
+    padding: 20px 20px 12px 20px;
+  }
+
+  .widget-content {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 12px;
+  }
+
+  .dashboard-header {
+    margin-bottom: 32px;
+  }
+
+  .widget-header {
+    padding: 16px 16px 8px 16px;
+  }
+
+  .widget-content {
+    padding: 16px;
+  }
+
+  .summary-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 12px;
+  }
+
+  .stat-value {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-container {
+    padding: 8px;
+  }
+
+  .widget-header {
+    padding: 12px 12px 6px 12px;
+  }
+
+  .widget-content {
+    padding: 12px;
+  }
+
+  .summary-stats {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+/* Animation classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Loading skeleton styles */
+.skeleton-container {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Dark theme overrides for dashboard widgets */
+[data-theme="dark"] .widget-card,
+[data-theme="dark"] .MuiPaper-root {
+  background: #1e293b !important;
+  border: 1px solid #475569 !important;
+  color: #f8fafc !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 2px 4px -1px rgba(0, 0, 0, 0.2) !important;
+}
+
+[data-theme="dark"] .widget-card:hover,
+[data-theme="dark"] .MuiPaper-root:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4),
+    0 10px 10px -5px rgba(0, 0, 0, 0.3) !important;
+}
+
+[data-theme="dark"] .stat-card {
+  background: #334155 !important;
+  border: 1px solid #475569 !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .chart-container {
+  background: #1e293b !important;
+  border: 1px solid #475569 !important;
+}
+
+[data-theme="dark"] .summary-stats {
+  background: #1e293b !important;
+  border: 1px solid #475569 !important;
+}
+
+[data-theme="dark"] .alert-container {
+  background: #334155 !important;
+  border: 1px solid #475569 !important;
+}
+
+[data-theme="dark"] .list-container {
+  background: #1e293b !important;
+  border: 1px solid #475569 !important;
+}
+
+[data-theme="dark"] .status-chip {
+  background: #334155 !important;
+  border: 1px solid #475569 !important;
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .progress-bar {
+  background: #334155 !important;
+}
+
+[data-theme="dark"] .progress-bar::-webkit-progress-bar {
+  background: #334155 !important;
+}
+
+[data-theme="dark"] .progress-bar::-webkit-progress-value {
+  background: #a5b4fc !important;
+}
+
+[data-theme="dark"] .progress-bar::-moz-progress-bar {
+  background: #a5b4fc !important;
+}
+
+/* Dark theme table styles */
+[data-theme="dark"] .MuiTableContainer-root {
+  background: #1e293b !important;
+  border: 1px solid #475569 !important;
+}
+
+[data-theme="dark"] .MuiTableHead-root .MuiTableRow-root {
+  background: #334155 !important;
+}
+
+[data-theme="dark"] .MuiTableBody-root .MuiTableRow-root:nth-of-type(odd) {
+  background: #1e293b !important;
+}
+
+[data-theme="dark"] .MuiTableBody-root .MuiTableRow-root:hover {
+  background: #475569 !important;
+}
+
+[data-theme="dark"] .MuiTableCell-root {
+  color: #f8fafc !important;
+  border-color: #475569 !important;
+}
+
+/* Dark theme list styles */
+[data-theme="dark"] .MuiList-root {
+  background: #1e293b !important;
+  border: 1px solid #475569 !important;
+}
+
+[data-theme="dark"] .MuiListItem-root:hover {
+  background: #475569 !important;
+}
+
+[data-theme="dark"] .MuiListItemText-primary {
+  color: #f8fafc !important;
+}
+
+[data-theme="dark"] .MuiListItemText-secondary {
+  color: #cbd5e1 !important;
+}
+
+/* Dark theme chip styles */
+[data-theme="dark"] .MuiChip-root {
+  background: #334155 !important;
+  border-color: #475569 !important;
+  color: #f8fafc !important;
+}
+
+/* Dark theme alert styles */
+[data-theme="dark"] .MuiAlert-root {
+  background: #334155 !important;
+  border: 1px solid #475569 !important;
+  color: #f8fafc !important;
+}
+
+/* Dark theme skeleton styles */
+[data-theme="dark"] .MuiSkeleton-root {
+  background: #475569 !important;
+}
+
+/* Dark theme divider styles */
+[data-theme="dark"] .MuiDivider-root {
+  background: #475569 !important;
+}
+
+/* Dark theme for Material-UI Paper components */
+[data-theme="dark"] .MuiPaper-root {
+  background: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+/* Dark theme for Material-UI Typography */
+[data-theme="dark"] .MuiTypography-root {
+  color: #f8fafc !important;
+}
+
+/* Dark theme for Material-UI Box */
+[data-theme="dark"] .MuiBox-root {
+  color: #f8fafc !important;
 }

@@ -1,11 +1,11 @@
 import React from "react";
 import {
-  Container,
   Grid,
   Box,
   Typography,
   useTheme,
   useMediaQuery,
+  Container,
 } from "@mui/material";
 import RiskOverviewPanel from "./dashboard/RiskOverviewPanel";
 import CloudMisconfigurationHeatmap from "./dashboard/CloudMisconfigurationHeatmap";
@@ -25,13 +25,9 @@ const Dashboard = () => {
     <Box
       sx={{
         minHeight: "100vh",
-        background:
-          theme.palette.mode === "dark"
-            ? "linear-gradient(135deg, #0f172a 0%, #1e293b 100%)"
-            : "linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)",
+        background: `linear-gradient(135deg, ${theme.palette.background.default} 0%, ${theme.palette.grey[50]} 100%)`,
         py: 4,
         px: { xs: 2, sm: 3, md: 4 },
-        color: theme.palette.text.primary,
       }}
     >
       <Container
@@ -45,10 +41,7 @@ const Dashboard = () => {
             component="h1"
             sx={{
               fontWeight: 700,
-              background:
-                theme.palette.mode === "dark"
-                  ? "linear-gradient(45deg, #a5b4fc, #a78bfa)"
-                  : "linear-gradient(45deg, #667eea, #764ba2)",
+              background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
               backgroundClip: "text",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -59,17 +52,15 @@ const Dashboard = () => {
           </Typography>
           <Typography
             variant="h6"
-            sx={{
-              fontWeight: 400,
-              color: theme.palette.text.secondary,
-            }}
+            color="text.secondary"
+            sx={{ fontWeight: 400 }}
           >
             Comprehensive security monitoring and risk assessment
           </Typography>
         </Box>
 
         {/* Dashboard Grid */}
-        <Grid container spacing={3} sx={{ width: "100%" }} columns={12}>
+        <Grid container spacing={3} sx={{ width: "100%" }}>
           {/* First Row - Risk Overview, Cloud Misconfiguration, and Secrets Hygiene */}
           <Grid item xs={12} sm={12} md={4} lg={4} xl={4} sx={{ minWidth: 0 }}>
             <RiskOverviewPanel />
@@ -82,12 +73,12 @@ const Dashboard = () => {
           </Grid>
 
           {/* Second Row - Package Vetting Summary (Full Width) */}
-          <Grid item xs={12} md={12} lg={12} xl={12}>
+          <Grid item xs={12}>
             <PackageVettingSummary />
           </Grid>
 
           {/* Third Row - IAM Risk Analyzer (Full Width) */}
-          <Grid item xs={12} md={12} lg={12} xl={12}>
+          <Grid item xs={12}>
             <IamRiskAnalyzer />
           </Grid>
 
